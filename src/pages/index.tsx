@@ -57,6 +57,24 @@ function resetWards() {
   }
 }
 
+async function uploadImage(url: string, data: any) {
+  // Default options are marked with *
+  var imageData = new FormData()
+  imageData.append("image", data)
+  const response = await fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "image/jpeg",
+    },
+    body: imageData,
+  }).then((resp) => {
+    return resp
+  })
+  const jsonData = await response.json()
+  // parses JSON response into native JavaScript
+  console.log(jsonData)
+}
+
 function Home() {
   const [days, setDays] = useState<number>()
   const [hours, setHours] = useState<number>()
@@ -175,29 +193,29 @@ function Home() {
       element[0].appendChild(modal)
     }
 
-    async function uploadImage(data: any) {
-      var name = "helo"
-      loader()
-      var imageData = new FormData()
-      imageData.append("image", data)
-      // await $.ajax({
-      //   processData: false,
-      //   contentType: false,
-      //   type: "POST",
-      //   url: "/upload",
-      //   data: imageData,
-      //   success: function (resp: any) {
-      //     removeLoader()
-      //     // alertBox(resp.message)
-      //     name = String(resp.name)
-      //   },
-      //   error: function () {
-      //     removeLoader()
-      //     alertBox("Lỗi trong quá tình gửi")
-      //   },
-      // })
-      return name
-    }
+    // async function uploadImage(data: any) {
+    //   var name = "helo"
+    //   loader()
+    //   var imageData = new FormData()
+    //   imageData.append("image", data)
+    //   // await $.ajax({
+    //   //   processData: false,
+    //   //   contentType: false,
+    //   //   type: "POST",
+    //   //   url: "/upload",
+    //   //   data: imageData,
+    //   //   success: function (resp: any) {
+    //   //     removeLoader()
+    //   //     // alertBox(resp.message)
+    //   //     name = String(resp.name)
+    //   //   },
+    //   //   error: function () {
+    //   //     removeLoader()
+    //   //     alertBox("Lỗi trong quá tình gửi")
+    //   //   },
+    //   // })
+    //   return name
+    // }
 
     let cmndLink = ""
     let avatarLink = ""
@@ -208,9 +226,9 @@ function Home() {
 
     cmnd.addEventListener("change", async function setName() {
       const nameFile = document.getElementsByClassName("input-file-control")
-      console.log(cmnd.files[0])
       if (cmnd.value != "") {
-        cmndLink = await uploadImage(cmnd.files[0])
+        uploadImage("/api/upload", cmnd.files[0])
+        // cmndLink = await uploadImage()
         nameFile[0].textContent = cmnd.value.slice(
           cmnd.value.lastIndexOf("\\") + 1,
           cmnd.value.length
@@ -677,8 +695,8 @@ function Home() {
               <h3 className="title">Thẩm mỹ viện quốc tế VISIANA</h3>
               <ul className="list-contact">
                 <li className="contact-item">
-                  Địa chỉ: Số 39 Đ/4, đường Trần Huỳnh, khóm 2, P7, TP. Bạc
-                  Liêu, tỉnh Bạc Liêu
+                  Địa chỉ: Số 74 Hoà Bình, P3, TP Bạc Liêu (gần vòng xoay Ngã Tư
+                  Quốc Tế)
                 </li>
                 <li className="contact-item">
                   Hotline: 0944 968 689 &ndash; 0845 580 052
