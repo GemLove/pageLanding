@@ -204,21 +204,21 @@ function Home() {
     let avatarLeftLink = ""
     let avatarRightLink = ""
 
-    // const cmnd:any = document.getElementById("cmnd")
+    const cmnd: any = document.getElementById("cmnd")
 
-    // cmnd.addEventListener("change", async function setName() {
-    //   const nameFile = document.getElementsByClassName("input-file-control")
-    //   if (cmnd.value != "") {
-    //     var formData = new FormData(document.getElementById("form"))
-    //     cmndLink = await uploadImage(formData.get("cmnd"))
-    //     nameFile[0].textContent = cmnd.value.slice(
-    //       cmnd.value.lastIndexOf("\\") + 1,
-    //       cmnd.value.length
-    //     )
-    //   } else {
-    //     nameFile[0].textContent = "CMT/CCCD"
-    //   }
-    // })
+    cmnd.addEventListener("change", async function setName() {
+      const nameFile = document.getElementsByClassName("input-file-control")
+      console.log(cmnd.files[0])
+      if (cmnd.value != "") {
+        cmndLink = await uploadImage(cmnd.files[0])
+        nameFile[0].textContent = cmnd.value.slice(
+          cmnd.value.lastIndexOf("\\") + 1,
+          cmnd.value.length
+        )
+      } else {
+        nameFile[0].textContent = "CMT/CCCD"
+      }
+    })
 
     // const avatar:any = document.getElementById("avatar")
 

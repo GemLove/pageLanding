@@ -294,7 +294,7 @@ justify-content: center;
     background-image: url('https://www.svgrepo.com/show/80156/down-arrow.svg');
     background-repeat: no-repeat;
     background-size: 14px 14px;
-    background-position: calc(100% - 2px);
+    background-position: calc(100% - 3px);
 
 }
 
@@ -315,7 +315,7 @@ justify-content: center;
     background-image: url('/images/icon/upload.jpg');
     background-repeat: no-repeat;
     background-size: 24px 24px;
-    background-position: calc(100% - 14px);
+    background-position: calc(100% - 1px);
     padding-right: 36px;
     cursor: pointer;
 }
@@ -637,9 +637,79 @@ justify-content: center;
     .wrapper #countdown{
         bottom: 0.5%;
     }
+    .wrapper {
+        margin: 0;
+        width: 100%;
+    }
+
+    .wrapper>.text>.description {
+        margin: 16px 16px;
+    }
+
+    .wrapper>.text>.title {
+        font-size: 20px;
+
+    }
+
+    .wrapper>.form-content>.form-item {
+        margin: 0px 24px;
+    }
+
+    .wrapper>.product>.box {
+        margin: 0px 16px;
+
+    }
+
+    .wrapper>.product>.box>.images {
+        border: 5px solid white;
+        margin: 8px 0;
+        width: 47%;
+
+    }
+
+    .wrapper>.footer>.content>.tabright {
+        width: 100%;
+    }
+
+    .wrapper>.footer>.content>.tab-left {
+        width: 100%;
+    }
+
     .wrapper #countdown>ul>li>.timer {
-        width: 65px;
-        font-size: 3.4rem;
+        width: 50px;
+        font-size: 2.5rem;
+    }
+
+    .wrapper>.form-content>.form-item>.input-control {
+        height: 34px;
+        font-size: 12px;
+    }
+
+    .wrapper>.form-content>.form-item>select.input-control {
+        background-size: 10px 10px;
+        padding-right: 24px;
+        background-position: calc(100% - 10px);
+    }
+
+    .wrapper>.form-content>.form-item>.input-file-control {
+        font-size: 12px;
+        background-size: 14px 14px;
+        background-position: calc(100% - 10px);
+    }
+
+    .wrapper>.form-content>.form-item>.checkbox-control {
+        font-size: 12px;
+    }
+
+    .hide-sm {
+        display: none;
+    }
+
+    .wrapper>.flex-box {
+        width: 100%;
+    }
+    .wrapper>.form-content>.form-item>.title{
+        width: 100%;
     }
 }
 @media(min-width: 500px) and (max-width:768px) {

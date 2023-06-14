@@ -18,7 +18,7 @@ class MyDocument extends Document {
     return (
       <Html style={{ scrollBehavior: "smooth" }}>
         <Head>
-          <link rel="icon" href={"/favicon.ico"} sizes="any" />
+          {/* <link rel="icon" href={"/favicon.ico"} sizes="any" /> */}
         </Head>
         <body>
           <Main />
