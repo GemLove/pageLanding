@@ -60,7 +60,8 @@ function resetWards() {
 async function uploadImage(url: string, data: any) {
   // Default options are marked with *
   var imageData = new FormData()
-  imageData.append("image", data)
+  imageData.append("file", data)
+  console.log(data)
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -702,7 +703,7 @@ function Home() {
                   Hotline: 0944 968 689 &ndash; 0845 580 052
                 </li>
                 <li className="contact-item">
-                  Email: dothituyetnhi0101@gmail.com
+                  Email: dothituyetnhi01011993@gmail.com
                 </li>
                 <li className="contact-item">
                   Website: thammyvienquoctevisiana.vn
