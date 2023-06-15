@@ -467,6 +467,11 @@ function Home() {
               required={true}
               onFocus={(event: any) => {
                 event.target.setAttribute("type", "date")
+                event.target.click()
+              }}
+              onTouchStart={(event: any) => {
+                event.target.setAttribute("type", "date")
+                event.target.click()
               }}
             />
           </div>

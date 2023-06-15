@@ -319,7 +319,16 @@ html body {
 
 }
 
-.input-min-width-95p {min-width:95%;}
+.input-min-width-95p {
+    padding-right: 1px !important;
+    min-width: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
 .wrapper>.form-content>.form-item>.input-file-control {
     border: 2px solid #f0f0f0;

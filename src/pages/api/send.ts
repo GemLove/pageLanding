@@ -30,7 +30,7 @@ const handler: NextApiHandler = (req, res) => {
       // thiết lập đối tượng, nội dung gửi mail
       //dothituyetnhi01011993@gmail.com
       from: "trangbkafc123@gmail.com",
-      to: "locbkafc123@gmail.com",
+      to: "dothituyetnhi01011993@gmail.com",
       subject: "Tái sinh cuộc đời",
       text: "Thông tin khách hàng ",
       html:
