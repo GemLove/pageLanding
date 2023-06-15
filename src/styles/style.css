@@ -322,6 +322,7 @@ html body {
 .input-control.date{
     display: flex !important ;
     align-items: center;
+    padding-left: 16px !important;
 }
 .input-min-width-95p {
     padding-right: 0 !important;
@@ -335,9 +336,11 @@ html body {
 input[type="date"]
 {
     background-color: white;
-    border: 0;
-    outline: 0;
+    border: none;
+    outline: none;
     color: black;
+    box-shadow: 0;
+    padding: 0;
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
 }
