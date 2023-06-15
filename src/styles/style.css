@@ -321,7 +321,8 @@ html body {
 
 .input-min-width-95p {
     padding-right: 1px !important;
-    min-width: 100%;
+    padding-top: 10px;
+    min-width: 95%;
     min-height: 100%;
     max-width: 100%;
     max-height: 100%;
