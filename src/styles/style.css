@@ -319,11 +319,12 @@ html body {
 
 }
 
-.input-control.date{
-    display: flex !important ;
+.input-control.date {
+    display: flex !important;
     align-items: center;
     padding-left: 16px !important;
 }
+
 .input-min-width-95p {
     padding-right: 0 !important;
     min-width: 100%;
@@ -333,14 +334,14 @@ html body {
     font-size: 16px;
 }
 
-input[type="date"]
-{
-    background-color: white !important;
+input[type="date"] {
+    display: block;
     border: none;
     outline: none;
-    color: black;
     box-shadow: 0;
     padding: 0;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
 }
 
 .wrapper>.form-content>.form-item>.input-file-control {
@@ -740,7 +741,8 @@ input[type="date"]
         height: 34px;
         font-size: 12px;
     }
-    .input-min-width-95p{
+
+    .input-min-width-95p {
         font-size: 12px;
     }
 
@@ -821,7 +823,8 @@ input[type="date"]
         height: 34px;
         font-size: 12px;
     }
-    .input-min-width-95p{
+
+    .input-min-width-95p {
         font-size: 12px;
     }
 
