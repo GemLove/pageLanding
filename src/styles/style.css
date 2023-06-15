@@ -291,6 +291,7 @@ html body {
     vertical-align: middle;
     width: 100%;
     padding: 0 18px;
+    background-color: white;
 
 }
 
@@ -320,18 +321,24 @@ html body {
 }
 
 .input-min-width-95p {
-    padding-right: 1px !important;
-    padding-top: 10px;
-    text-transform: inherit;
-    text-decoration: inherit;
-    text-align: inherit;
-    letter-spacing: inherit;
-    color: inherit;
-    background-size: inherit;
-    background-attachment: inherit;
-    background-origin: inherit;
-    min-width: 95%;
+    padding-right: 0 !important;
+    min-width: 100%;
     min-height: 100%;
+    vertical-align: middle;
+}
+
+input[type="date"] {
+    display: block;
+    outline: 0;
+    padding: 0px;
+    border: 0;
+    font-size: 16px;
+    /* Solution 1 */
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+
+    /* Solution 2 */
+    /* min-width: 96%; */
 }
 
 .wrapper>.form-content>.form-item>.input-file-control {

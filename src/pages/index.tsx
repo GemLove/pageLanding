@@ -458,22 +458,24 @@ function Home() {
             </select>
           </div>
           <div className="form-item">
-            <input
-              className="input-control input-min-width-95p"
-              id="birthday"
-              type="text"
-              name="birthday"
-              placeholder="Ngày sinh"
-              required={true}
-              onFocus={(event: any) => {
-                event.target.setAttribute("type", "date")
-                event.target.click()
-              }}
-              onTouchStart={(event: any) => {
-                event.target.setAttribute("type", "date")
-                event.target.click()
-              }}
-            />
+            <div className="input-control input-min-width-95p">
+              <input
+                className=" input-min-width-95p"
+                id="birthday"
+                type="text"
+                name="birthday"
+                placeholder="Ngày sinh"
+                required={true}
+                onFocus={(event: any) => {
+                  event.target.setAttribute("type", "date")
+                  event.target.click()
+                }}
+                onTouchStart={(event: any) => {
+                  event.target.setAttribute("type", "date")
+                  event.target.click()
+                }}
+              />
+            </div>
           </div>
           <div className="form-item">
             <select
