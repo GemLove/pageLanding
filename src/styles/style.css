@@ -332,6 +332,15 @@ html body {
     font-size: 16px;
 }
 
+input[type="date"]
+{
+    background-color: white;
+    border: 0;
+    outline: 0;
+    color: black;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+}
 
 .wrapper>.form-content>.form-item>.input-file-control {
     border: 2px solid #f0f0f0;
