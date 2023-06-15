@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Head from "next/head"
+import axios from "axios"
 
 async function logJSONData() {
   const response = await fetch(
@@ -9,9 +10,10 @@ async function logJSONData() {
         "Content-Type": "text/plain",
       },
     }
-  ).then((resp) => {
-    return resp
-  })
+  )
+    .then((resp) => {
+      return resp
+    })
   const jsonData = await response.json()
   const provinces = jsonData.data.data
   provinces.map((item: any) => {
@@ -57,23 +59,37 @@ function resetWards() {
   }
 }
 
-async function uploadImage(url: string, data: any) {
-  // Default options are marked with *
-  var imageData = new FormData()
-  imageData.append("file", data)
-  console.log(data)
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "image/jpeg",
-    },
-    body: imageData,
-  }).then((resp) => {
-    return resp
+function alertBox(mess: string) {
+  const modal = document.createElement("div")
+  modal.classList.add("alert")
+  modal.innerHTML = `<div class="alert-message-box">
+  <span class="alert-message-head">Alert</span>
+  <div class="alert-message-text">${mess}</div>
+  <button class="alert-message-close">OK</button>
+</div>`
+  const element = document.getElementsByTagName("body")
+  element[0].appendChild(modal)
+  element[0].classList.add("no-scroll")
+  const close: any = document.getElementsByClassName("alert-message-close")
+  close[0].addEventListener("click", function closeModal() {
+    const alret = close[0].parentNode.parentNode
+    element[0].classList.remove("no-scroll")
+    alret.remove()
   })
-  const jsonData = await response.json()
-  // parses JSON response into native JavaScript
-  console.log(jsonData)
+}
+
+function removeLoader() {
+  document.getElementsByClassName("alert")[0].remove()
+  document.getElementsByTagName("body")[0].classList.remove("no-scroll")
+}
+
+function loader() {
+  const modal = document.createElement("div")
+  modal.classList.add("alert")
+  modal.innerHTML = `<div class="loader"></div>`
+  const element = document.getElementsByTagName("body")
+  element[0].classList.add("no-scroll")
+  element[0].appendChild(modal)
 }
 
 function Home() {
@@ -81,6 +97,75 @@ function Home() {
   const [hours, setHours] = useState<number>()
   const [minutes, setMinutes] = useState<number>()
   const [seconds, setSeconds] = useState<number>()
+  const [selectedCMND, setSelectedCMND] = useState("")
+  const [selectedAvatar, setSelectedAvatar] = useState("")
+  const [selectedLeftAvatar, setSelectedLeftAvatar] = useState("")
+  const [selectedRightAvatar, setSelectedRightAvatar] = useState("")
+
+  const handleUpload = async (data: any) => {
+    const file = data
+    loader()
+    try {
+      if (!file) return
+      const formData = new FormData()
+      formData.append("myImage", file)
+      const { data } = await axios.post("/api/upload", formData)
+      removeLoader()
+      return data.filename
+    } catch (error: any) {
+      console.log(error.response?.data)
+    }
+  }
+  function resetForm() {
+    let form = document.querySelector("form")
+    if (form) {
+      form.reset()
+      setSelectedCMND("")
+      setSelectedAvatar("")
+      setSelectedLeftAvatar("")
+      setSelectedRightAvatar("")
+    }
+  }
+  const handleSendMail = async (event: any) => {
+    event.preventDefault()
+    var form = document.querySelector("form")
+    if (form) {
+      var formData = new FormData(form)
+      var province: any = document.getElementById("provinces")
+      province = province.options[province.selectedIndex].text
+      formData.set("provinces", province)
+      var district: any = document.getElementById("districts")
+      district = district.options[district.selectedIndex].text
+      formData.set("districts", district)
+      var ward: any = document.getElementById("wards")
+      ward = ward.options[ward.selectedIndex].text
+      formData.set("wards", ward)
+      if (
+        selectedCMND != "" &&
+        selectedAvatar != "" &&
+        selectedLeftAvatar != "" &&
+        selectedRightAvatar != ""
+      ) {
+        formData.set("cmnd", selectedCMND)
+        formData.set("avatar", selectedAvatar)
+        formData.set("avatarLeft", selectedLeftAvatar)
+        formData.set("avatarRight", selectedRightAvatar)
+        const queryString = new URLSearchParams(formData as any).toString()
+        loader()
+        try {
+          const { data } = await axios.post("/api/send", queryString)
+          removeLoader()
+          alertBox(data)
+          resetForm()
+        } catch (error: any) {
+          console.log(error.response?.data)
+          alertBox("Gửi thất bại do lỗi server")
+        }
+      } else {
+        alertBox("Vui lòng nhập đầy đủ thông tin")
+      }
+    }
+  }
   useEffect(() => {
     const second = 1000,
       minute = second * 60,
@@ -179,195 +264,6 @@ function Home() {
         select.appendChild(option)
       })
     })
-
-    function removeLoader() {
-      document.getElementsByClassName("alert")[0].remove()
-      document.getElementsByTagName("body")[0].classList.remove("no-scroll")
-    }
-
-    function loader() {
-      const modal = document.createElement("div")
-      modal.classList.add("alert")
-      modal.innerHTML = `<div class="loader"></div>`
-      const element = document.getElementsByTagName("body")
-      element[0].classList.add("no-scroll")
-      element[0].appendChild(modal)
-    }
-
-    // async function uploadImage(data: any) {
-    //   var name = "helo"
-    //   loader()
-    //   var imageData = new FormData()
-    //   imageData.append("image", data)
-    //   // await $.ajax({
-    //   //   processData: false,
-    //   //   contentType: false,
-    //   //   type: "POST",
-    //   //   url: "/upload",
-    //   //   data: imageData,
-    //   //   success: function (resp: any) {
-    //   //     removeLoader()
-    //   //     // alertBox(resp.message)
-    //   //     name = String(resp.name)
-    //   //   },
-    //   //   error: function () {
-    //   //     removeLoader()
-    //   //     alertBox("Lỗi trong quá tình gửi")
-    //   //   },
-    //   // })
-    //   return name
-    // }
-
-    let cmndLink = ""
-    let avatarLink = ""
-    let avatarLeftLink = ""
-    let avatarRightLink = ""
-
-    const cmnd: any = document.getElementById("cmnd")
-
-    cmnd.addEventListener("change", async function setName() {
-      const nameFile = document.getElementsByClassName("input-file-control")
-      if (cmnd.value != "") {
-        uploadImage("/api/upload", cmnd.files[0])
-        // cmndLink = await uploadImage()
-        nameFile[0].textContent = cmnd.value.slice(
-          cmnd.value.lastIndexOf("\\") + 1,
-          cmnd.value.length
-        )
-      } else {
-        nameFile[0].textContent = "CMT/CCCD"
-      }
-    })
-
-    // const avatar:any = document.getElementById("avatar")
-
-    // avatar.addEventListener("change", async function setName(event:any) {
-    //   const nameFile = document.getElementsByClassName("input-file-control")
-    //   if (avatar.value != "") {
-    //     var formData = new FormData($("#form")[0])
-    //     avatarLink = await uploadImage(formData.get("avatar"))
-    //     nameFile[1].textContent = avatar.value.slice(
-    //       avatar.value.lastIndexOf("\\") + 1,
-    //       avatar.value.length
-    //     )
-    //   } else {
-    //     nameFile[1].textContent = "Ảnh chính diện"
-    //   }
-    // })
-
-    // const avatarLeft:any = document.getElementById("avatarLeft")
-
-    // avatarLeft.addEventListener("change", async function setName() {
-    //   const nameFile = document.getElementsByClassName("input-file-control")
-    //   if (avatarLeft.value != "") {
-    //     var formData = new FormData($("#form")[0])
-    //     avatarLeftLink = await uploadImage(formData.get("avatarLeft"))
-    //     nameFile[2].textContent = avatarLeft.value.slice(
-    //       avatarLeft.value.lastIndexOf("\\") + 1,
-    //       avatarLeft.value.length
-    //     )
-    //   } else {
-    //     nameFile[2].textContent = "Ảnh nghiêng trái"
-    //   }
-    // })
-
-    // const avatarRight:any = document.getElementById("avatarRight")
-
-    // avatarRight.addEventListener("change", async function setName() {
-    //   const nameFile = document.getElementsByClassName("input-file-control")
-    //   if (avatarRight.value != "") {
-    //     var formData = new FormData($("#form")[0])
-    //     avatarRightLink = await uploadImage(formData.get("avatarRight"))
-    //     nameFile[3].textContent = avatarRight.value.slice(
-    //       avatarRight.value.lastIndexOf("\\") + 1,
-    //       avatarRight.value.length
-    //     )
-    //   } else {
-    //     nameFile[3].textContent = "Ảnh nghiêng phải"
-    //   }
-    // })
-
-    // const birthday:any = document.getElementById("birthday")
-    // birthday.addEventListener("focus", function date() {
-    //   birthday.setAttribute("type", "date")
-    // })
-
-    // birthday.addEventListener("focusout", function date() {
-    //   if (birthday.value === "") {
-    //     birthday.setAttribute("type", "text")
-    //   }
-    // })
-
-    // const form = document.getElementById("form")
-    // const submit = document.getElementById("submit")
-
-    // function alertBox(mess:string) {
-    //   const modal = document.createElement("div")
-    //   modal.classList.add("alert")
-    //   modal.innerHTML = `<div class="alert-message-box">
-    //   <span class="alert-message-head">Alert</span>
-    //   <div class="alert-message-text">${mess}</div>
-    //   <button class="alert-message-close">OK</button>
-    // </div>`
-    //   const element = document.getElementsByTagName("body")
-    //   element[0].appendChild(modal)
-    //   element[0].classList.add("no-scroll")
-    //   const close:any = document.getElementsByClassName("alert-message-close")
-    //   close[0].addEventListener("click", function closeModal() {
-    //     const alret = close[0].parentNode.parentNode
-    //     element[0].classList.remove("no-scroll")
-    //     alret.remove()
-    //   })
-    // }
-
-    // function resetForm() {
-    //   const nameFile = document.getElementsByClassName("input-file-control")
-    //   document.getElementById("form").
-    //   nameFile[0].textContent = "CMT/CCCD"
-    //   nameFile[1].textContent = "Ảnh chính diện"
-    //   nameFile[2].textContent = "Ảnh nghiêng trái"
-    //   nameFile[3].textContent = "Ảnh nghiêng phải"
-    //   $("#cmnd").val(null)
-    //   $("#avatar").val(null)
-    //   $("#avatarLeft").val(null)
-    //   $("#avatarRight").val(null)
-    // }
-
-    // form.addEventListener("submit", async function (event) {
-    //   event.preventDefault()
-    //   const cmnd = String(document.getElementById("cmnd").value)
-    //   const avatar = String(document.getElementById("avatar").value)
-    //   const avatarLeft = String(document.getElementById("avatarLeft").value)
-    //   const avatarRight = String(document.getElementById("avatarRight").value)
-    //   var data = $("#form").serialize()
-    //   if (cmnd != "" && avatar != "" && avatarLeft != "" && avatarRight != "") {
-    //     data += `&provinces= ${$("#provinces").find(":selected").text()}`
-    //     data += `&districts= ${$("#districts").find(":selected").text()}`
-    //     data += `&wards= ${$("#wards").find(":selected").text()}`
-    //     data += `&cmnd=${cmndLink}`
-    //     data += `&avatar=${avatarLink}`
-    //     data += `&avatarLeft=${avatarLeftLink}`
-    //     data += `&avatarRight=${avatarRightLink}`
-    //     loader()
-    //     $.ajax({
-    //       processData: false,
-    //       type: "POST",
-    //       url: "/send",
-    //       data: data,
-    //       success: function (data) {
-    //         removeLoader()
-    //         alertBox(data)
-    //         resetForm()
-    //       },
-    //       error: function () {
-    //         removeLoader()
-    //         alertBox("Lỗi trong quá tình gửi")
-    //       },
-    //     })
-    //   } else {
-    //     alertBox("Vui lòng nhập đầy đủ thông tin")
-    //   }
-    // })
   }, [])
 
   return (
@@ -507,6 +403,9 @@ function Home() {
           method="post"
           name="submit"
           encType="multipart/form-data"
+          onSubmit={(event: any) => {
+            handleSendMail(event)
+          }}
         >
           <div className="form-item">
             <img className="image" src="/images/top-background.png" alt="" />
@@ -525,7 +424,7 @@ function Home() {
               type="text"
               name="fullname"
               placeholder="Họ và tên"
-              required={true}
+              required
             />
           </div>
           <div className="form-item">
@@ -547,7 +446,7 @@ function Home() {
             <input
               className="input-control"
               id="birthday"
-              type="text"
+              type="date"
               name="birthday"
               placeholder="Ngày sinh"
               required={true}
@@ -603,9 +502,25 @@ function Home() {
               type="file"
               name="cmnd"
               accept="image/*"
+              onChange={async (event) => {
+                if (event.target.files?.length) {
+                  const file: any = event.target.files
+                  if (file[0]) {
+                    const filename = await handleUpload(file[0])
+                    setSelectedCMND(filename)
+                  } else {
+                    setSelectedCMND("")
+                  }
+                }
+              }}
             />
             <label className="input-file-control" htmlFor="cmnd">
-              CMT/CCCD
+              {selectedCMND !== ""
+                ? selectedCMND.substring(
+                    selectedCMND.indexOf("_") + 1,
+                    selectedCMND.length
+                  )
+                : "CMT/CCCD"}
             </label>
           </div>
           <div className="form-item">
@@ -615,9 +530,25 @@ function Home() {
               type="file"
               name="avatar"
               accept="image/*"
+              onChange={async (event) => {
+                if (event.target.files?.length) {
+                  const file: any = event.target.files
+                  if (file[0]) {
+                    const filename = await handleUpload(file[0])
+                    setSelectedAvatar(filename)
+                  } else {
+                    setSelectedAvatar("")
+                  }
+                }
+              }}
             />
             <label className="input-file-control" htmlFor="avatar">
-              Ảnh chính diện
+              {selectedAvatar !== ""
+                ? selectedAvatar.substring(
+                    selectedAvatar.indexOf("_") + 1,
+                    selectedAvatar.length
+                  )
+                : "Ảnh chính diện"}
             </label>
           </div>
           <div className="form-item">
@@ -627,9 +558,25 @@ function Home() {
               type="file"
               name="avatarLeft"
               accept="image/*"
+              onChange={async (event) => {
+                if (event.target.files?.length) {
+                  const file: any = event.target.files
+                  if (file[0]) {
+                    const filename = await handleUpload(file[0])
+                    setSelectedLeftAvatar(filename)
+                  } else {
+                    setSelectedLeftAvatar("")
+                  }
+                }
+              }}
             />
             <label className="input-file-control" htmlFor="avatarLeft">
-              Ảnh nghiêng trái
+              {selectedLeftAvatar !== ""
+                ? selectedLeftAvatar.substring(
+                    selectedLeftAvatar.indexOf("_") + 1,
+                    selectedLeftAvatar.length
+                  )
+                : "Ảnh nghiêng trái"}
             </label>
           </div>
           <div className="form-item">
@@ -639,9 +586,25 @@ function Home() {
               type="file"
               name="avatarRight"
               accept="image/*"
+              onChange={async (event) => {
+                if (event.target.files?.length) {
+                  const file: any = event.target.files
+                  if (file[0]) {
+                    const filename = await handleUpload(file[0])
+                    setSelectedRightAvatar(filename)
+                  } else {
+                    setSelectedRightAvatar("")
+                  }
+                }
+              }}
             />
             <label className="input-file-control" htmlFor="avatarRight">
-              Ảnh nghiêng phải
+              {selectedRightAvatar !== ""
+                ? selectedRightAvatar.substring(
+                    selectedRightAvatar.indexOf("_") + 1,
+                    selectedRightAvatar.length
+                  )
+                : "Ảnh nghiêng phải"}
             </label>
           </div>
           <div className="form-item">
@@ -676,6 +639,8 @@ function Home() {
               <img className="icon" src="/images/icon/call.png" alt="icon" />
             </a>
           </div>
+        </div>
+        <div className="flex-box-right">
           <div className="flex-item">
             <a
               className="btn btn-call"
@@ -1032,4 +997,5 @@ function Home() {
     </>
   )
 }
+
 export default Home

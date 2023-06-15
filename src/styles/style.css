@@ -15,6 +15,7 @@ html body {
     background-color: #020663;
     width: 700px;
     margin: 0 auto;
+    position: relative;
 }
 
 .wrapper>* {
@@ -246,7 +247,7 @@ html body {
     padding: 8px 0;
     margin: 0px 96px;
     display: flex;
-justify-content: center;
+    justify-content: center;
 
 }
 
@@ -295,6 +296,7 @@ justify-content: center;
     background-repeat: no-repeat;
     background-size: 14px 14px;
     background-position: calc(100% - 3px);
+    background-color: white;
 
 }
 
@@ -352,7 +354,7 @@ justify-content: center;
     height: 44px;
     font-size: 16px;
     text-align: center;
-    
+
     width: 100%;
     margin-bottom: 16px;
 }
@@ -468,11 +470,13 @@ justify-content: center;
     background-image: url('/images/icon/lock.png');
 
 }
-.wrapper>.banner.banner-count{
+
+.wrapper>.banner.banner-count {
     position: relative;
 }
+
 .wrapper #countdown {
-    position:absolute;
+    position: absolute;
     width: 100%;
     bottom: 1%;
     padding: 8px 0;
@@ -510,20 +514,31 @@ justify-content: center;
 }
 
 .wrapper>.flex-box {
-    display: flex;
     margin: 0;
-    width: 700px;
     padding: 0 8px;
-    top: 89vh;
-    justify-content: space-between;
-    position: fixed;
+    bottom: 1%;
+    position: absolute;
 }
 
-.wrapper>.flex-box>.flex-item>.btn>.icon {
+.wrapper>*>.flex-item>.btn>.icon {
+    position: fixed;
+    bottom: 1%;
+
     display: block;
-    animation: button 2s ease infinite;
+    animation: button 1.5s ease infinite;
     max-width: 72px;
 }
+
+.wrapper>.flex-box-right {
+    margin: 0;
+    padding: 0 8px;
+    bottom: 1%;
+    width: 88px;
+    right: 0%;
+    position: absolute;
+
+}
+
 
 .wrapper>.footer>.design {
     border-top: 1px solid #F9F871;
@@ -633,10 +648,12 @@ justify-content: center;
         transform: rotate(360deg);
     }
 }
-@media (max-width:500px){
-    .wrapper #countdown{
+
+@media (max-width:500px) {
+    .wrapper #countdown {
         bottom: 0.5%;
     }
+
     .wrapper {
         margin: 0;
         width: 100%;
@@ -708,10 +725,12 @@ justify-content: center;
     .wrapper>.flex-box {
         width: 100%;
     }
-    .wrapper>.form-content>.form-item>.title{
+
+    .wrapper>.form-content>.form-item>.title {
         width: 100%;
     }
 }
+
 @media(min-width: 500px) and (max-width:768px) {
     .wrapper {
         margin: 0;
@@ -784,7 +803,8 @@ justify-content: center;
     .wrapper>.flex-box {
         width: 100%;
     }
-    .wrapper>.form-content>.form-item>.title{
+
+    .wrapper>.form-content>.form-item>.title {
         width: 100%;
     }
 }
@@ -811,6 +831,7 @@ justify-content: center;
     .wrapper>.flex-box {
         width: 100%;
     }
+
     .wrapper #countdown {
         bottom: 2%;
     }

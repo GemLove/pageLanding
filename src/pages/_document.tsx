@@ -17,9 +17,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html style={{ scrollBehavior: "smooth" }}>
-        <Head>
-          {/* <link rel="icon" href={"/favicon.ico"} sizes="any" /> */}
-        </Head>
+        <Head></Head>
         <body>
           <Main />
           <NextScript />
