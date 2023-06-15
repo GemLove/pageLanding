@@ -458,7 +458,7 @@ function Home() {
             </select>
           </div>
           <div className="form-item">
-            <div className="input-control input-min-width-95p">
+            <div className="input-control date">
               <input
                 className=" input-min-width-95p"
                 id="birthday"

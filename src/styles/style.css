@@ -285,7 +285,6 @@ html body {
 .wrapper>.form-content>.form-item>.input-control {
     border: 1px solid #f0f0f0;
     outline: none;
-    display: inline-block;
     height: 44px;
     font-size: 16px;
     vertical-align: middle;
@@ -320,27 +319,19 @@ html body {
 
 }
 
+.input-control.date{
+    display: flex !important ;
+    align-items: center;
+}
 .input-min-width-95p {
     padding-right: 0 !important;
-    min-width: 96%;
-    min-height: 96%;
+    min-width: 100%;
     vertical-align: middle;
     border: 0;
-}
-
-input[type="date"] {
-    display: block;
     outline: 0;
-    padding: 0px;
-    border: 0;
     font-size: 16px;
-    /* Solution 1 */
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
-
-    /* Solution 2 */
-    /* min-width: 96%; */
 }
+
 
 .wrapper>.form-content>.form-item>.input-file-control {
     border: 2px solid #f0f0f0;
@@ -739,18 +730,8 @@ input[type="date"] {
         height: 34px;
         font-size: 12px;
     }
-    input[type="date"] {
-        display: block;
-        outline: 0;
-        padding: 0px;
-        border: 0;
+    .input-min-width-95p{
         font-size: 12px;
-        /* Solution 1 */
-        -webkit-appearance: textfield;
-        -moz-appearance: textfield;
-    
-        /* Solution 2 */
-        /* min-width: 96%; */
     }
 
     .wrapper>.form-content>.form-item>select.input-control {
@@ -830,18 +811,8 @@ input[type="date"] {
         height: 34px;
         font-size: 12px;
     }
-    input[type="date"] {
-        display: block;
-        outline: 0;
-        padding: 0px;
-        border: 0;
+    .input-min-width-95p{
         font-size: 12px;
-        /* Solution 1 */
-        -webkit-appearance: textfield;
-        -moz-appearance: textfield;
-    
-        /* Solution 2 */
-        /* min-width: 96%; */
     }
 
     .wrapper>.form-content>.form-item>select.input-control {
