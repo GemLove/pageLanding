@@ -335,7 +335,7 @@ html body {
 
 input[type="date"]
 {
-    background-color: white;
+    background-color: white !important;
     border: none;
     outline: none;
     color: black;
