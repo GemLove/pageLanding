@@ -325,6 +325,7 @@ html body {
     min-width: 100%;
     min-height: 100%;
     vertical-align: middle;
+    border: 0;
 }
 
 input[type="date"] {
@@ -738,11 +739,16 @@ input[type="date"] {
         height: 34px;
         font-size: 12px;
     }
-
     input[type="date"] {
-        font-size: 12px;
+        display: block;
+        outline: 0;
+        padding: 0px;
+        border: 0;
+        font-size: 16px;
         /* Solution 1 */
-
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+    
         /* Solution 2 */
         /* min-width: 96%; */
     }
@@ -825,7 +831,17 @@ input[type="date"] {
         font-size: 12px;
     }
     input[type="date"] {
-        font-size: 12px;
+        display: block;
+        outline: 0;
+        padding: 0px;
+        border: 0;
+        font-size: 16px;
+        /* Solution 1 */
+        -webkit-appearance: textfield;
+        -moz-appearance: textfield;
+    
+        /* Solution 2 */
+        /* min-width: 96%; */
     }
 
     .wrapper>.form-content>.form-item>select.input-control {
