@@ -739,6 +739,14 @@ input[type="date"] {
         font-size: 12px;
     }
 
+    input[type="date"] {
+        font-size: 12px;
+        /* Solution 1 */
+
+        /* Solution 2 */
+        /* min-width: 96%; */
+    }
+
     .wrapper>.form-content>.form-item>select.input-control {
         background-size: 10px 10px;
         padding-right: 24px;
@@ -814,6 +822,9 @@ input[type="date"] {
 
     .wrapper>.form-content>.form-item>.input-control {
         height: 34px;
+        font-size: 12px;
+    }
+    input[type="date"] {
         font-size: 12px;
     }
 
