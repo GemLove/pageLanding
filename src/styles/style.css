@@ -341,8 +341,6 @@ input[type="date"]
     color: black;
     box-shadow: 0;
     padding: 0;
-    -webkit-appearance: textfield;
-    -moz-appearance: textfield;
 }
 
 .wrapper>.form-content>.form-item>.input-file-control {
