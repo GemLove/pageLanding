@@ -329,6 +329,7 @@ html body {
 .input-min-width-95p {
     padding-right: 0 !important;
     min-width: 100%;
+    min-height: 16px;
     vertical-align: middle;
     border: 0;
     outline: 0;
@@ -336,12 +337,13 @@ html body {
 }
 
 input[type="date"] {
-    display: inline-block;
-    background-color: white;
-    color: black;
+    display: block;
+    min-width: 100%;
+    min-height: 16px;
     border: none;
     outline: none;
     box-shadow: 0;
+    appearance: textfield;
     -webkit-appearance: textfield;
     -moz-appearance: textfield;
 }
