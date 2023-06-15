@@ -322,8 +322,8 @@ html body {
 
 .input-min-width-95p {
     padding-right: 0 !important;
-    min-width: 100%;
-    min-height: 100%;
+    min-width: 96%;
+    min-height: 96%;
     vertical-align: middle;
     border: 0;
 }
@@ -744,7 +744,7 @@ input[type="date"] {
         outline: 0;
         padding: 0px;
         border: 0;
-        font-size: 16px;
+        font-size: 12px;
         /* Solution 1 */
         -webkit-appearance: textfield;
         -moz-appearance: textfield;
@@ -835,7 +835,7 @@ input[type="date"] {
         outline: 0;
         padding: 0px;
         border: 0;
-        font-size: 16px;
+        font-size: 12px;
         /* Solution 1 */
         -webkit-appearance: textfield;
         -moz-appearance: textfield;
