@@ -58,29 +58,22 @@ const handler: NextApiHandler = (req, res) => {
       attachments: [
         {
           filename: "cmnd.jpg",
-          path:
-            path.join(process.cwd(), "/public/images/upload/") + req.body.cmnd,
+          path: req.body.cmnd,
           cid: "cmnd", //same cid value as in the html img src
         },
         {
           filename: "avatar.jpg",
-          path:
-            path.join(process.cwd(), "/public/images/upload/") +
-            req.body.avatar,
+          path: req.body.avatar,
           cid: "avatar", //same cid value as in the html img src
         },
         {
           filename: "avatarLeft.jpg",
-          path:
-            path.join(process.cwd(), "/public/images/upload/") +
-            req.body.avatarLeft,
+          path: req.body.avatarLeft,
           cid: "avatarLeft", //same cid value as in the html img src
         },
         {
           filename: "avatarRight.jpg",
-          path:
-            path.join(process.cwd(), "/public/images/upload/") +
-            req.body.avatarRight,
+          path: req.body.avatarRight,
           cid: "avatarRight", //same cid value as in the html img src
         },
       ],
@@ -88,10 +81,10 @@ const handler: NextApiHandler = (req, res) => {
     transporter.sendMail(mainOptions, function (err, info) {
       if (err) {
         console.log(err)
-        res.json("Lỗi hệ thống trong quá trình gửi")
+        res.json({ err: true, mess: "Lỗi hệ thống trong quá trình gửi" })
       } else {
         // console.log("Message sent: " + info.response)
-        res.json("Gửi thành công")
+        res.json({ err: false, mess: "Gửi thành công" })
       }
     })
   }

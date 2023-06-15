@@ -10,10 +10,9 @@ async function logJSONData() {
         "Content-Type": "text/plain",
       },
     }
-  )
-    .then((resp) => {
-      return resp
-    })
+  ).then((resp) => {
+    return resp
+  })
   const jsonData = await response.json()
   const provinces = jsonData.data.data
   provinces.map((item: any) => {
@@ -108,12 +107,14 @@ function Home() {
     try {
       if (!file) return
       const formData = new FormData()
-      formData.append("myImage", file)
+      formData.append("file", file)
       const { data } = await axios.post("/api/upload", formData)
       removeLoader()
       return data.filename
     } catch (error: any) {
-      console.log(error.response?.data)
+      alertBox(error.response?.data.message)
+      removeLoader()
+      return error.response?.data.filename
     }
   }
   function resetForm() {
@@ -146,17 +147,31 @@ function Home() {
         selectedLeftAvatar != "" &&
         selectedRightAvatar != ""
       ) {
-        formData.set("cmnd", selectedCMND)
-        formData.set("avatar", selectedAvatar)
-        formData.set("avatarLeft", selectedLeftAvatar)
-        formData.set("avatarRight", selectedRightAvatar)
+        formData.set(
+          "cmnd",
+          selectedCMND.substring(0, selectedCMND.indexOf("_name"))
+        )
+        formData.set(
+          "avatar",
+          selectedAvatar.substring(0, selectedAvatar.indexOf("_name"))
+        )
+        formData.set(
+          "avatarLeft",
+          selectedLeftAvatar.substring(0, selectedLeftAvatar.indexOf("_name"))
+        )
+        formData.set(
+          "avatarRight",
+          selectedRightAvatar.substring(0, selectedRightAvatar.indexOf("_name"))
+        )
         const queryString = new URLSearchParams(formData as any).toString()
         loader()
         try {
           const { data } = await axios.post("/api/send", queryString)
           removeLoader()
-          alertBox(data)
-          resetForm()
+          alertBox(data.mess)
+          if (data.err) {
+            resetForm()
+          }
         } catch (error: any) {
           console.log(error.response?.data)
           alertBox("Gửi thất bại do lỗi server")
@@ -517,7 +532,7 @@ function Home() {
             <label className="input-file-control" htmlFor="cmnd">
               {selectedCMND !== ""
                 ? selectedCMND.substring(
-                    selectedCMND.indexOf("_") + 1,
+                    selectedCMND.indexOf("_name") + 5,
                     selectedCMND.length
                   )
                 : "CMT/CCCD"}
@@ -545,7 +560,7 @@ function Home() {
             <label className="input-file-control" htmlFor="avatar">
               {selectedAvatar !== ""
                 ? selectedAvatar.substring(
-                    selectedAvatar.indexOf("_") + 1,
+                    selectedAvatar.indexOf("_name") + 5,
                     selectedAvatar.length
                   )
                 : "Ảnh chính diện"}
@@ -573,7 +588,7 @@ function Home() {
             <label className="input-file-control" htmlFor="avatarLeft">
               {selectedLeftAvatar !== ""
                 ? selectedLeftAvatar.substring(
-                    selectedLeftAvatar.indexOf("_") + 1,
+                    selectedLeftAvatar.indexOf("_name") + 5,
                     selectedLeftAvatar.length
                   )
                 : "Ảnh nghiêng trái"}
@@ -601,7 +616,7 @@ function Home() {
             <label className="input-file-control" htmlFor="avatarRight">
               {selectedRightAvatar !== ""
                 ? selectedRightAvatar.substring(
-                    selectedRightAvatar.indexOf("_") + 1,
+                    selectedRightAvatar.lastIndexOf("_name") + 5,
                     selectedRightAvatar.length
                   )
                 : "Ảnh nghiêng phải"}
