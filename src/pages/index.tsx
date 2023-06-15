@@ -169,7 +169,7 @@ function Home() {
           const { data } = await axios.post("/api/send", queryString)
           removeLoader()
           alertBox(data.mess)
-          if (data.err) {
+          if (!data.err) {
             resetForm()
           }
         } catch (error: any) {
@@ -459,12 +459,15 @@ function Home() {
           </div>
           <div className="form-item">
             <input
-              className="input-control"
+              className="input-control input-min-width-95p"
               id="birthday"
-              type="date"
+              type="text"
               name="birthday"
               placeholder="Ngày sinh"
               required={true}
+              onFocus={(event: any) => {
+                event.target.setAttribute("type", "date")
+              }}
             />
           </div>
           <div className="form-item">
@@ -748,7 +751,6 @@ function Home() {
                     viewBox="0 0 120 46"
                     version="1.1"
                   >
-                    <title>01A4C888-5C08-4E72-A790-500649432FF1</title>
                     <desc>Created with sketchtool.</desc>
                     <defs></defs>
                     <g
