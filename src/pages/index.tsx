@@ -458,7 +458,7 @@ function Home() {
             </select>
           </div>
           <div className="form-item">
-            <div className="input-control date">
+            <div className="input-control date" >
               <input
                 className=" input-min-width-95p"
                 id="birthday"
@@ -1014,7 +1014,7 @@ function Home() {
             </div>
           </div>
           <div className="design">
-            &copy; Coppyright 2023 VISIANA, Developed by WebNhuY.vn
+            &copy; Copyright 2023 VISIANA, Developed by WebNhuY.vn
           </div>
         </div>
       </div>
