@@ -298,6 +298,10 @@ function Home() {
           href="https://nhispa.vn/wp-content/uploads/2023/02/cropped-Logo-NHI-SPA-900x900-PNG-file--32x32.png"
           sizes="32x32"
         />
+        <meta
+          name="description"
+          content="THẨM MỸ NHÂN ÁI, GƯƠNG MẶT RẠNG RỠ, MỞ ĐƯỜNG THÀNH CÔNG - ĐƯỢC TÀI TRỢ 100% BỞI THẨM MỸ VIỆN QUỐC TẾ VISIANA"
+        ></meta>
         <title>Thẩm mỹ viện quốc tế Visiana</title>
       </Head>
       <div className="wrapper">
@@ -327,10 +331,18 @@ function Home() {
           </p>
         </div>
         <div className="banner">
-          <img className="banner-images" src="/images/banner/banner-01.jpg" />
+          <img
+            className="banner-images"
+            src="/images/banner/banner-01.jpg"
+            alt="banner1"
+          />
         </div>
         <div className="banner banner-count">
-          <img className="banner-images" src="/images/banner/banner-02.jpg" />
+          <img
+            className="banner-images"
+            src="/images/banner/banner-02.jpg"
+            alt="banner2"
+          />
           <div id="countdown">
             <ul>
               <li>
@@ -361,7 +373,11 @@ function Home() {
           </div>
         </div>
         <div className="banner">
-          <img className="banner-images" src="/images/banner/banner-03.jpg" />
+          <img
+            className="banner-images"
+            src="/images/banner/banner-03.jpg"
+            alt="banner3"
+          />
         </div>
         <div className="product">
           <div className="box">
@@ -458,7 +474,7 @@ function Home() {
             </select>
           </div>
           <div className="form-item">
-            <div className="input-control date" >
+            <div className="input-control date">
               <input
                 className=" input-min-width-95p"
                 id="birthday"
@@ -1014,7 +1030,10 @@ function Home() {
             </div>
           </div>
           <div className="design">
-            &copy; Copyright 2023 VISIANA, Developed by WebNhuY.vn
+            &copy; Copyright 2023 VISIANA,{" "}
+            <a href="https://tinhocnhuy.com" target="_blank" rel="noopener">
+              Developed by WebNhuY.vn
+            </a>
           </div>
         </div>
       </div>
